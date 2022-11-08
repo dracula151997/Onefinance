@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PrimaryEditText">
+        <attr name="android:label" format="string"/>
+        <attr name="android:inputType" format="flags"/>
+        <attr name="trailingIcon" format="reference"/>
+        <attr name="android:maxLength" format="integer"/>
+        <attr name="showPasswordToggleIcon" format="boolean"/>
+    </declare-styleable>
+</resources>
