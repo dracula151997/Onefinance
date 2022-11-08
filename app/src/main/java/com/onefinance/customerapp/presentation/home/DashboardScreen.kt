@@ -54,7 +54,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(
+fun DashboardScreen(
     viewModel: MainViewModel,
     onNavigateToNextScreen: (NavDirections) -> Unit,
 ) {
@@ -111,7 +111,6 @@ fun HomeScreen(
                             }
                         }
                     }
-
                 }
 
             }

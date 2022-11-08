@@ -14,7 +14,7 @@ import com.onefinance.customerapp.presentation.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<BaseViewModel>() {
+class DashboardFragment : BaseFragment<BaseViewModel>() {
     private val viewModel by viewModels<MainViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment<BaseViewModel>() {
     ): View = ComposeView(requireContext()).apply {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
-            HomeScreen(viewModel, onNavigateToNextScreen = { navigate(it) })
+            DashboardScreen(viewModel, onNavigateToNextScreen = { navigate(it) })
         }
     }
 
