@@ -1,4 +1,4 @@
-package com.onefinance.customerapp.presentation.dashboard
+package com.onefinance.customerapp.presentation.dashboard.components
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -29,7 +29,7 @@ sealed class BottomNavItem(
 
     object Calculator : BottomNavItem(
         R.drawable.ic_card_selected,
-        R.drawable.ic_calculator_unselected,
+        R.drawable.ic_card_unselected,
         "calculator"
     )
 }
