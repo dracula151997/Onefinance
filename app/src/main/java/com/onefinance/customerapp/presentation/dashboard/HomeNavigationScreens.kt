@@ -1,4 +1,4 @@
-package com.onefinance.customerapp.presentation.home
+package com.onefinance.customerapp.presentation.dashboard
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

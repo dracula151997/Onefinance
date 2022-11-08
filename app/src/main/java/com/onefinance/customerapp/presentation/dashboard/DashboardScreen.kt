@@ -1,4 +1,4 @@
-package com.onefinance.customerapp.presentation.home
+package com.onefinance.customerapp.presentation.dashboard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -143,9 +143,17 @@ fun DashboardScreen(
                 composable(DrawerNavScreen.TransactionHistory.route) {
                     Text(text = "Transaction History")
                 }
+                composable(DrawerNavScreen.OurBranches.route) {
+                    OurBranchesContent()
+                }
             }
         },
     )
+}
+
+@Composable
+fun OurBranchesContent() {
+
 }
 
 @Composable

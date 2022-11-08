@@ -1,4 +1,4 @@
-package com.onefinance.customerapp.presentation.home
+package com.onefinance.customerapp.presentation.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

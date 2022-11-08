@@ -3,7 +3,7 @@ package com.onefinance.customerapp.presentation.main
 import androidx.lifecycle.viewModelScope
 import com.onefinance.customerapp.core.presentation.base.BaseViewModel
 import com.onefinance.customerapp.core.presentation.base.UiAction
-import com.onefinance.customerapp.presentation.home.DashboardFragmentDirections
+import com.onefinance.customerapp.presentation.dashboard.DashboardFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
