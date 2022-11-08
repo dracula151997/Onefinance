@@ -34,4 +34,5 @@
     <color name="medium">#ff8f00</color>
     <color name="strong">#FCCA3F</color>
     <color name="bulletproof">#00c853</color>
+    <color name="ghost_white">#FEFCF8</color>
 </resources>

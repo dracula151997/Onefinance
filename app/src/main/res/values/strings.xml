@@ -61,4 +61,8 @@
     <string name="drawer_nav_faqs_title">FAQs</string>
     <string name="drawer_nav_terms_and_conditions_title">Terms and Conditions</string>
     <string name="drawer_nav_logout_title">Logout</string>
+    <string name="home_possibilities_tab_title">Possibilities</string>
+    <string name="home_card_tab_title">Card</string>
+    <string name="home_limit_title">Limit</string>
+    <string name="home_spent_title">Spent</string>
 </resources>

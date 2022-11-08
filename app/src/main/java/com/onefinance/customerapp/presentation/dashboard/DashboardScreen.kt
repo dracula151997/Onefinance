@@ -43,6 +43,7 @@ import com.onefinance.customerapp.core.presentation.base.UiAction
 import com.onefinance.customerapp.presentation.dashboard.components.BottomNavItem
 import com.onefinance.customerapp.presentation.dashboard.components.DrawerContent
 import com.onefinance.customerapp.presentation.dashboard.components.DrawerNavScreen
+import com.onefinance.customerapp.presentation.dashboard.home.HomeScreen
 import com.onefinance.customerapp.presentation.main.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -76,7 +77,7 @@ fun DashboardScreen(
     }
     Scaffold(
         scaffoldState = scaffoldState,
-        backgroundColor = Color(0xffCDDAF6),
+        backgroundColor = colorResource(id = R.color.ghost_white),
         topBar = {
             BaseTopAppBar(
                 onNavigationDrawerClicked = {
@@ -88,16 +89,14 @@ fun DashboardScreen(
         },
         bottomBar = {
             HomeBottomNavigation(
-                currentRoute = currentRoute,
-                onBottomNavigationItemClicked = { route ->
+                currentRoute = currentRoute, onBottomNavigationItemClicked = { route ->
                     navController.navigate(route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true
                     }
-                },
-                items = items
+                }, items = items
             )
         },
         drawerContent = {
@@ -136,7 +135,7 @@ private fun DashboardNavHost(
         navController = navController, startDestination = BottomNavItem.Home.route, modifier
     ) {
         composable(BottomNavItem.Home.route) {
-            Text(text = "Home")
+            HomeScreen()
         }
         composable(BottomNavItem.Calculator.route) {
             Text(text = "Calculator")
@@ -171,7 +170,7 @@ fun BaseTopAppBar(
     onNavigationDrawerClicked: () -> Unit,
 ) {
     TopAppBar(
-        backgroundColor = Color(0xffF6D89C),
+        backgroundColor = colorResource(id = R.color.drawer_layout_color),
         elevation = 0.dp,
         contentPadding = PaddingValues(horizontal = 30.dp)
     ) {
@@ -220,7 +219,9 @@ fun HomeBottomNavigation(
     modifier: Modifier = Modifier,
     onBottomNavigationItemClicked: (route: String) -> Unit,
 ) {
-    BottomNavigation(modifier = modifier.fillMaxWidth(), backgroundColor = Color.White) {
+    BottomNavigation(
+        modifier = modifier.fillMaxWidth(), backgroundColor = Color.White, elevation = 0.dp
+    ) {
         items.forEach { item ->
             BottomNavigationItem(
                 selected = currentRoute == item.route,
