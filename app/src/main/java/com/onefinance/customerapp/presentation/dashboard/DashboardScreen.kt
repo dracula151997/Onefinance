@@ -28,7 +28,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -61,11 +63,14 @@ fun DashboardScreen(
     )
     LaunchedEffect(key1 = Unit) {
         lifecycleOwner.lifecycleScope.launch {
-            viewModel.uiAction.collectLatest {
-                when (it) {
-                    is UiAction.NavigateWithDirection -> onNavigateToNextScreen(it.navDirections)
-                    else -> {}
+            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiAction.collectLatest {
+                    when (it) {
+                        is UiAction.NavigateWithDirection -> onNavigateToNextScreen(it.navDirections)
+                        else -> {}
+                    }
                 }
+
             }
         }
     }
