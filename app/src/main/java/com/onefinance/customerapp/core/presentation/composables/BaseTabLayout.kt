@@ -30,6 +30,11 @@ sealed class HomeTab(@StringRes val stringRes: Int) {
     object Card : HomeTab(R.string.home_card_tab_title)
 }
 
+val tabs = listOf(
+    HomeTab.Possibilities,
+    HomeTab.Card,
+)
+
 @Composable
 fun BaseTabLayout(
     tabs: List<HomeTab>,

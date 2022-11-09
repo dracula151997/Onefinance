@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,19 +49,20 @@ import com.onefinance.customerapp.core.presentation.composables.BaseTabLayout
 import com.onefinance.customerapp.core.presentation.composables.HomeTab
 import com.onefinance.customerapp.core.presentation.composables.LimitColumn
 import com.onefinance.customerapp.core.presentation.composables.currencyText
+import com.onefinance.customerapp.core.presentation.composables.tabs
 import com.onefinance.customerapp.ui.theme.poppins
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onSeeAllClicked: () -> Unit,
+    onRecentlyTransactionClicked: (id: Int) -> Unit,
+) {
     val pagerState = rememberPagerState()
     val tabIndex = pagerState.currentPage
     val scope = rememberCoroutineScope()
-    val tabs = listOf(
-        HomeTab.Possibilities,
-        HomeTab.Card,
-    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -73,13 +76,19 @@ fun HomeScreen() {
             }
         }
         Spacer(modifier = Modifier.height(12.dp))
-        RecentlyTransactionsSection()
+        RecentlyTransactionsSection(
+            onRecentlyTransactionClicked = onRecentlyTransactionClicked,
+            onSeeAllClicked = onSeeAllClicked
+        )
 
     }
 }
 
 @Composable
-private fun RecentlyTransactionsSection() {
+private fun RecentlyTransactionsSection(
+    onSeeAllClicked: () -> Unit,
+    onRecentlyTransactionClicked: (id: Int) -> Unit,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,23 +107,30 @@ private fun RecentlyTransactionsSection() {
             fontWeight = FontWeight.SemiBold,
             fontFamily = poppins,
             fontSize = 13.sp,
-            color = colorResource(id = R.color.light_blue)
+            color = colorResource(id = R.color.light_blue),
+            modifier = Modifier.clickable(
+                onClick = onSeeAllClicked,
+                interactionSource = remember {
+                    MutableInteractionSource()
+                },
+                indication = null,
+            )
         )
     }
 
-    RecentlyTransactionsList()
+    RecentlyTransactionsList(onRecentlyTransactionClicked)
 }
 
 @Composable
-private fun RecentlyTransactionsList() {
+private fun RecentlyTransactionsList(
+    onRecentlyTransactionClicked: (id: Int) -> Unit,
+) {
     LazyColumn(
         contentPadding = PaddingValues(vertical = 3.dp, horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(dummyRecentlyTransactions) { transaction ->
-            RecentlyTransactionItem(transaction) {
-
-            }
+            RecentlyTransactionItem(transaction, onRecentlyTransactionClicked)
         }
     }
 }
@@ -217,8 +233,7 @@ fun TransactionStatus(
     status: TransactionStatus,
 ) {
     Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = painterResource(id = status.iconRes),

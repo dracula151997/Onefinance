@@ -1,6 +1,7 @@
 package com.onefinance.customerapp.presentation.dashboard
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,7 +9,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -23,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
@@ -80,12 +84,18 @@ fun DashboardScreen(
         backgroundColor = colorResource(id = R.color.home_screen_background),
         topBar = {
             BaseTopAppBar(
+                backgroundColor = if (navBackStackEntry?.destination?.route == BottomNavItem.Home.route) colorResource(
+                    id = R.color.drawer_layout_color
+                ) else colorResource(
+                    id = R.color.home_screen_background
+                ),
                 onNavigationDrawerClicked = {
                     scope.launch { scaffoldState.drawerState.open() }
                 },
                 onNotificationClicked = {},
                 onProfileClicked = {},
             )
+
         },
         bottomBar = {
             HomeBottomNavigation(
@@ -121,7 +131,11 @@ fun DashboardScreen(
         drawerBackgroundColor = colorResource(id = R.color.drawer_layout_color),
         drawerShape = RoundedCornerShape(topEnd = 30.dp),
         content = { contentPadding ->
-            DashboardNavHost(navController, Modifier.padding(contentPadding))
+            DashboardNavHost(navController, Modifier.padding(contentPadding), onSeeAllClicked = {
+                viewModel.navigateToAllTransactionsScreen()
+            }, onRecentlyTransactionClicked = { id ->
+                viewModel.navigateToTransactionDetails(id)
+            })
         },
     )
 }
@@ -130,12 +144,14 @@ fun DashboardScreen(
 private fun DashboardNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    onSeeAllClicked: () -> Unit,
+    onRecentlyTransactionClicked: (id: Int) -> Unit,
 ) {
     NavHost(
         navController = navController, startDestination = BottomNavItem.Home.route, modifier
     ) {
         composable(BottomNavItem.Home.route) {
-            HomeScreen()
+            HomeScreen(onSeeAllClicked, onRecentlyTransactionClicked)
         }
         composable(BottomNavItem.Calculator.route) {
             Text(text = "Calculator")
@@ -165,12 +181,13 @@ fun OurBranchesContent() {
 
 @Composable
 fun BaseTopAppBar(
+    backgroundColor: Color = colorResource(id = R.color.home_screen_background),
     onNotificationClicked: () -> Unit,
     onProfileClicked: () -> Unit,
     onNavigationDrawerClicked: () -> Unit,
 ) {
     TopAppBar(
-        backgroundColor = colorResource(id = R.color.drawer_layout_color),
+        backgroundColor = backgroundColor,
         elevation = 0.dp,
         contentPadding = PaddingValues(horizontal = 30.dp)
     ) {
@@ -209,6 +226,25 @@ fun BaseTopAppBar(
 
         }
 
+    }
+}
+
+@Composable
+fun BackTopBar(
+    modifier: Modifier = Modifier,
+    onBackClicked: () -> Unit,
+) {
+    Row(modifier.fillMaxWidth()) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_back_arrow),
+            contentDescription = null,
+            modifier = Modifier
+                .size(35.dp)
+                .clip(CircleShape)
+                .background(colorResource(id = R.color.metallic_yellow))
+                .padding(9.dp)
+                .clickable { onBackClicked() }
+        )
     }
 }
 

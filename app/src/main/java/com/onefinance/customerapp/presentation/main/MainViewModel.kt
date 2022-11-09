@@ -29,4 +29,20 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
             _uiAction.emit(UiAction.NavigateWithDirection(DashboardFragmentDirections.actionHomeFragmentToTransactionsFragment()))
         }
     }
+
+    fun navigateToTransactionDetails(id: Int) {
+        viewModelScope.launch {
+
+        }
+    }
+
+    fun navigateToAllTransactionsScreen() {
+        viewModelScope.launch {
+            _uiAction.emit(
+                UiAction.NavigateWithDirection(
+                    DashboardFragmentDirections.actionHomeFragmentToTransactionsFragment()
+                )
+            )
+        }
+    }
 }

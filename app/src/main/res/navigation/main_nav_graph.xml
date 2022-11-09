@@ -21,7 +21,11 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragmentFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/onBoardngFragment"
@@ -53,6 +57,10 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashFragmentFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -94,11 +102,15 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_transactionsFragment"
-            app:destination="@id/transactionsFragment" />
+            app:destination="@id/transactionsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="com.onefinance.customerapp.TransactionsFragment"
+        android:name="com.onefinance.customerapp.presentation.transactions.transaction_list.TransactionsFragment"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" />
 </navigation>
