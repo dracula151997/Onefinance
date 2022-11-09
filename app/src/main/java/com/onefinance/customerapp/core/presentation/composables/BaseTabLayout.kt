@@ -50,7 +50,7 @@ fun BaseTabLayout(
         backgroundColor = colorResource(id = R.color.caramel_2),
         indicator = {
             TabRowDefaults.Indicator(
-                height = 0.dp, color = Color.Transparent
+                color = Color.Transparent
             )
         }) {
         tabs.forEachIndexed { index, tab ->
