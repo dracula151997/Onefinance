@@ -1,5 +1,9 @@
 package com.onefinance.customerapp.core.dummy
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import com.onefinance.customerapp.R
+
 data class FakeRecentlyTransaction(
     val id: Int,
     val merchantName: String,
@@ -8,9 +12,19 @@ data class FakeRecentlyTransaction(
     val status: TransactionStatus,
 )
 
-sealed class TransactionStatus {
-    object Pending : TransactionStatus()
-    object Completed : TransactionStatus()
+sealed class TransactionStatus(
+    @DrawableRes val iconRes: Int,
+    @StringRes val statusNameRes: Int,
+) {
+    object Pending : TransactionStatus(
+        R.drawable.ic_pending_status,
+        R.string.transaction_status_pending
+    )
+
+    object Completed : TransactionStatus(
+        R.drawable.ic_completed_status,
+        R.string.transaction_status_completed
+    )
 }
 
 val dummyRecentlyTransactions = listOf(

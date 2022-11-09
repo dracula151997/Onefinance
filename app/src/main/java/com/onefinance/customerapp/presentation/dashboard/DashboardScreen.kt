@@ -77,7 +77,7 @@ fun DashboardScreen(
     }
     Scaffold(
         scaffoldState = scaffoldState,
-        backgroundColor = colorResource(id = R.color.ghost_white),
+        backgroundColor = colorResource(id = R.color.home_screen_background),
         topBar = {
             BaseTopAppBar(
                 onNavigationDrawerClicked = {

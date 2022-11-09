@@ -25,6 +25,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -40,6 +41,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.onefinance.customerapp.R
 import com.onefinance.customerapp.core.dummy.FakeRecentlyTransaction
+import com.onefinance.customerapp.core.dummy.TransactionStatus
 import com.onefinance.customerapp.core.dummy.dummyRecentlyTransactions
 import com.onefinance.customerapp.core.presentation.composables.BaseTabLayout
 import com.onefinance.customerapp.core.presentation.composables.HomeTab
@@ -127,7 +129,7 @@ fun RecentlyTransactionItem(
             .fillMaxWidth()
             .clickable { onItemClicked(transaction.id) },
         shape = RoundedCornerShape(9.dp),
-        elevation = 0.5.dp,
+        elevation = 0.dp,
     ) {
         Row(
             modifier = Modifier
@@ -169,7 +171,7 @@ fun RecentlyTransactionItem(
                         color = colorResource(id = R.color.charleston_green)
                     )
                 )
-
+                TransactionStatus(status = transaction.status)
 
             }
         }
@@ -207,6 +209,30 @@ private fun LimitSection(
                 )
             )
         }
+    }
+}
+
+@Composable
+fun TransactionStatus(
+    status: TransactionStatus,
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = status.iconRes),
+            contentDescription = null,
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = stringResource(id = status.statusNameRes),
+            fontSize = 11.sp,
+            fontFamily = poppins,
+            fontWeight = FontWeight.Normal,
+            color = colorResource(id = R.color.transaction_status_color)
+
+        )
     }
 }
 

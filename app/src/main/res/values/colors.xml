@@ -38,4 +38,6 @@
     <color name="light_blue">#00BAFF</color>
     <color name="jet">#343434</color>
     <color name="blanched_almond">#FFF1CC</color>
+    <color name="transaction_status_color">#A8A8A8</color>
+    <color name="home_screen_background">#F8FAFE</color>
 </resources>

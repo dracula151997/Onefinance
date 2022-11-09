@@ -68,4 +68,6 @@
     <string name="common_egp">EGP</string>
     <string name="home_recently_transaction_header">Recently Transaction</string>
     <string name="home_see_all_header">See all</string>
+    <string name="transaction_status_pending">Pending</string>
+    <string name="transaction_status_completed">Completed</string>
 </resources>
