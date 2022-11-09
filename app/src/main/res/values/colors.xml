@@ -35,4 +35,7 @@
     <color name="strong">#FCCA3F</color>
     <color name="bulletproof">#00c853</color>
     <color name="ghost_white">#FEFCF8</color>
+    <color name="light_blue">#00BAFF</color>
+    <color name="jet">#343434</color>
+    <color name="blanched_almond">#FFF1CC</color>
 </resources>

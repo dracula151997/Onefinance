@@ -65,4 +65,7 @@
     <string name="home_card_tab_title">Card</string>
     <string name="home_limit_title">Limit</string>
     <string name="home_spent_title">Spent</string>
+    <string name="common_egp">EGP</string>
+    <string name="home_recently_transaction_header">Recently Transaction</string>
+    <string name="home_see_all_header">See all</string>
 </resources>
