@@ -70,4 +70,5 @@
     <string name="home_see_all_header">See all</string>
     <string name="transaction_status_pending">Pending</string>
     <string name="transaction_status_completed">Completed</string>
+    <string name="err_manatory">Required</string>
 </resources>

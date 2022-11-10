@@ -98,6 +98,22 @@ class LoginFragment : BaseFragment<LoginViewModel>(),
                     }
                 }
 
+                launch {
+                    viewModel.nationalIdError.collectLatest {
+                        if (it) {
+                            binding?.nationalIdField?.setError(getString(R.string.err_manatory))
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.passwordError.collectLatest {
+                        if (it) {
+                            binding?.passwordField?.setError(getString(R.string.err_manatory))
+                        }
+                    }
+                }
+
             }
         }
     }

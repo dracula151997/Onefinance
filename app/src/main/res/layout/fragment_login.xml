@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/metallic_yellow"
-            android:paddingStart="16dp"
             android:paddingTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -44,10 +43,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="64dp"
+                android:fontFamily="@font/poppins_bold"
                 android:text="@string/login_hello_message_header"
                 android:textColor="@color/charleston_green"
-                android:fontFamily="@font/poppins_bold"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imageView2" />
@@ -77,10 +77,10 @@
             android:layout_marginTop="12dp"
             android:inputType="textPassword"
             android:label="@string/login_password_field_title"
-            app:showPasswordToggleIcon="true"
             app:layout_constraintEnd_toEndOf="@+id/national_id_field"
             app:layout_constraintStart_toStartOf="@+id/national_id_field"
             app:layout_constraintTop_toBottomOf="@+id/national_id_field"
+            app:showPasswordToggleIcon="true"
             app:trailingIcon="@drawable/ic_password_lock" />
 
         <TextView
@@ -88,9 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/login_forget_password_title"
             android:textColor="@color/orange_red"
-            android:fontFamily="@font/poppins_medium"
             app:layout_constraintEnd_toEndOf="@+id/password_field"
             app:layout_constraintTop_toBottomOf="@+id/password_field" />
 

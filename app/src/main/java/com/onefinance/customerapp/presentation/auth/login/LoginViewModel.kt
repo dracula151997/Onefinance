@@ -23,17 +23,37 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
     private val _isBiometricReadyForUse = MutableSharedFlow<Boolean>()
     val isBiometricReadyForAuthenticate = _isBiometricReadyForUse.asSharedFlow()
 
+    private val _nationalIdError = MutableSharedFlow<Boolean>()
+    val nationalIdError = _nationalIdError.asSharedFlow()
+
+    private val _passwordError = MutableSharedFlow<Boolean>()
+    val passwordError = _passwordError.asSharedFlow()
+
+
+    private suspend fun isNationalIdNotEmpty(nationalId: String): Boolean {
+        _nationalIdError.emit(nationalId.isEmpty())
+        return nationalId.isNotEmpty()
+    }
+
+    private suspend fun isPasswordNotEmpty(password: String): Boolean {
+        _passwordError.emit(password.isEmpty())
+        return password.isNotEmpty()
+    }
+
 
     fun performLogin(
         nationalId: String,
         password: String,
     ) {
         viewModelScope.launch {
-            setLoading()
-            delay(3000)
-            hideLoading()
-            _uiAction.emit(UiAction.NavigateWithDirection(LoginFragmentDirections.actionLoginFragmentToHomeFragment()))
+            if (isNationalIdNotEmpty(nationalId) && isPasswordNotEmpty(password)) {
+                setLoading()
+                delay(3000)
+                hideLoading()
+                _uiAction.emit(UiAction.NavigateWithDirection(LoginFragmentDirections.actionLoginFragmentToHomeFragment()))
+            }
         }
+
 
     }
 
