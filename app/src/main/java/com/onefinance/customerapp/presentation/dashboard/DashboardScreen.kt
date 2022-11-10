@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -54,7 +55,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun DashboardScreen(
-    viewModel: MainViewModel,
+    viewModel: MainViewModel = hiltViewModel(),
     onNavigateToNextScreen: (NavDirections) -> Unit,
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -63,9 +64,6 @@ fun DashboardScreen(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val lifecycleOwner = LocalLifecycleOwner.current
-    val items = listOf(
-        BottomNavItem.Home, BottomNavItem.Card, BottomNavItem.Offers, BottomNavItem.Calculator
-    )
     LaunchedEffect(key1 = Unit) {
         lifecycleOwner.lifecycleScope.launch {
             lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -84,7 +82,7 @@ fun DashboardScreen(
         backgroundColor = colorResource(id = R.color.home_screen_background),
         topBar = {
             BaseTopAppBar(
-                backgroundColor = if (navBackStackEntry?.destination?.route == BottomNavItem.Home.route) colorResource(
+                backgroundColor = if (currentRoute == BottomNavItem.Home.route) colorResource(
                     id = R.color.drawer_layout_color
                 ) else colorResource(
                     id = R.color.home_screen_background
@@ -106,11 +104,11 @@ fun DashboardScreen(
                         }
                         launchSingleTop = true
                     }
-                }, items = items
+                }, items = viewModel.bottomNavigationItems
             )
         },
         drawerContent = {
-            DrawerContent(prepareNavigationDrawerItems()) { route ->
+            DrawerContent(viewModel.drawerItems) { route ->
                 scope.launch {
                     scaffoldState.drawerState.close()
                     when (route) {
@@ -276,16 +274,4 @@ fun HomeBottomNavigation(
             )
         }
     }
-}
-
-fun prepareNavigationDrawerItems(): List<DrawerNavScreen> {
-    return listOf(
-        DrawerNavScreen.Installments,
-        DrawerNavScreen.TransactionHistory,
-        DrawerNavScreen.OurBranches,
-        DrawerNavScreen.ContactUs,
-        DrawerNavScreen.FAQs,
-        DrawerNavScreen.TermsAndCondition,
-        DrawerNavScreen.Logout
-    )
 }

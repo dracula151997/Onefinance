@@ -62,7 +62,6 @@ fun HomeScreen(
     val pagerState = rememberPagerState()
     val tabIndex = pagerState.currentPage
     val scope = rememberCoroutineScope()
-
     Column(
         modifier = Modifier
             .fillMaxSize()

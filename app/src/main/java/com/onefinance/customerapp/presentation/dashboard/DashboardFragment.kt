@@ -37,12 +37,6 @@ class DashboardFragment : BaseFragment<BaseViewModel>(),
             }
         }
     }
-//    ): View = ComposeView(requireContext()).apply {
-//        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-//        setContent {
-//
-//        }
-//    }
 
 }
 
